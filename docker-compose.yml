@@ -8,6 +8,7 @@ services:
       - 8080:80
     volumes:
       - ./php/www:/var/www/html
+      - ./php/php.ini:/usr/local/etc/php/php.ini-production
   postgres:
     image: postgres:13.3
     container_name: postgres
