@@ -1,0 +1,18 @@
+version: '3.6'
+services:
+  php:
+    image: php:7.4-apache
+    container_name: php
+    restart: always
+    ports:
+      - 8080:80
+    volumes:
+      - ./php/www:/var/www/html
+  postgres:
+    image: postgres:13.3
+    container_name: postgres
+    restart: always
+    ports:
+      - 8090:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
