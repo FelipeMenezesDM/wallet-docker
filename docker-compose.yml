@@ -1,6 +1,9 @@
 version: '3.6'
 services:
   php:
+    build:
+      context: .
+      dockerfile: ./php/php.dockerfile
     image: php:7.4-apache
     container_name: php
     restart: always
@@ -8,7 +11,7 @@ services:
       - 8080:80
     volumes:
       - ./php/www:/var/www/html
-      - ./php/php.ini:/usr/local/etc/php/php.ini-production
+      - ./php/php.ini:/usr/local/etc/php/php.ini
   postgres:
     image: postgres:13.3
     container_name: postgres
