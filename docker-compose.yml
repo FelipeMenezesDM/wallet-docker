@@ -12,6 +12,9 @@ services:
     volumes:
       - ./php/www:/var/www/html
       - ./php/php.ini:/usr/local/etc/php/php.ini
+    environment:
+      - OKTAISSUER=https://dev-44729302.okta.com/oauth2/default
+      - OKTASCOPE=wallet
   postgres:
     image: postgres:13.3
     container_name: postgres
