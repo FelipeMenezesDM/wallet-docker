@@ -10,11 +10,8 @@ services:
     ports:
       - 8080:80
     volumes:
-      - ./php/www:/var/www/html
+      - ./www:/var/www/html
       - ./php/php.ini:/usr/local/etc/php/php.ini
-    environment:
-      - OKTAISSUER=https://dev-44729302.okta.com/oauth2/default
-      - OKTASCOPE=wallet
   postgres:
     image: postgres:13.3
     container_name: postgres
@@ -23,3 +20,11 @@ services:
       - 8090:5432
     environment:
       POSTGRES_PASSWORD: postgres
+  nginx:
+    image: nginx:1.17.1-alpine
+    container_name: nginx
+    restart: always
+    ports:
+      - 80:80
+    volumes:
+      - ./www/wallet/dist/wallet:/usr/share/nginx/html
