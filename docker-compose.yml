@@ -8,10 +8,12 @@ services:
     container_name: php
     restart: always
     ports:
-      - 8080:80
+      - 80:80
     volumes:
-      - ./www:/var/www/html
+      - ./www/wallet-backend:/var/www/html/wallet-backend
+      - ./www/wallet/dist/wallet:/var/www/html/wallet
       - ./php/php.ini:/usr/local/etc/php/php.ini
+      - ./php/wallet.conf:/etc/apache2/sites-available/wallet.conf
   postgres:
     image: postgres:13.3
     container_name: postgres
@@ -20,11 +22,13 @@ services:
       - 8090:5432
     environment:
       POSTGRES_PASSWORD: postgres
-  nginx:
-    image: nginx:1.17.1-alpine
-    container_name: nginx
-    restart: always
-    ports:
-      - 80:80
     volumes:
-      - ./www/wallet/dist/wallet:/usr/share/nginx/html
+      - ./postgres/backups:/backups
+#  nginx:
+#    image: nginx:1.17.1-alpine
+#    container_name: nginx
+#    restart: always
+#    ports:
+#      - 80:80
+#    volumes:
+#      - ./www/wallet/dist/wallet:/usr/share/nginx/html
